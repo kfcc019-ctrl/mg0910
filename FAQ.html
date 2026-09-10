@@ -36,7 +36,15 @@
     }
 
     .header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
       margin-bottom: 24px;
+    }
+
+    .header-copy {
+      min-width: 0;
     }
 
     .header h1 {
@@ -49,6 +57,33 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.6;
+    }
+
+    .home-link {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .home-link:hover {
+      background: #dbeafe;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.12);
+    }
+
+    .home-link:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.16);
     }
 
     .panel {
@@ -204,6 +239,15 @@
         margin: 24px auto;
       }
 
+      .header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .home-link {
+        align-self: flex-start;
+      }
+
       .panel {
         padding: 16px;
       }
@@ -225,8 +269,17 @@
 <body>
   <main class="app">
     <header class="header">
-      <h1>업무 FAQ 검색</h1>
-      <p>등록된 사내 FAQ 범위 안에서 질문과 답변을 검색할 수 있습니다.</p>
+      <div class="header-copy">
+        <h1>업무 FAQ 검색</h1>
+        <p>등록된 사내 FAQ 범위 안에서 질문과 답변을 검색할 수 있습니다.</p>
+      </div>
+      <a
+        class="home-link"
+        href="https://kfcc019-ctrl.github.io/mg0910/index"
+        aria-label="MG 메인 페이지로 이동"
+      >
+        MG 메인으로 이동
+      </a>
     </header>
 
     <section class="panel" aria-label="업무 FAQ 검색 도우미">

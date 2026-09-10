@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>주요 금융권 정기예금 비교</title>
+  <meta name="description" content="금융기관별 1년 만기 정기예금 기본금리와 최고우대금리를 비교하는 대시보드">
+  <style>
+    :root{--mg:#005bac;--mg2:#003b73;--sky:#eaf4ff;--ink:#122033;--muted:#667085;--line:#dfe7f0;--bg:#f4f7fb;--good:#087a55;--white:#fff}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:16px}
+    button,input,select{font:inherit}.shell{max-width:1440px;margin:auto;padding:24px}.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}
+    h1{font-size:clamp(1.45rem,3vw,2.15rem);margin:0;letter-spacing:-.04em}.asof{margin-top:7px;color:var(--muted);font-size:.9rem}.actions{display:flex;gap:9px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.btn.primary{background:var(--mg);border-color:var(--mg);color:#fff}.btn:hover{transform:translateY(-1px)}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 7px 22px rgba(24,60,97,.055)}
+    .card{padding:18px}.card .label{font-size:.88rem;color:var(--muted);font-weight:650}.card .value{font-size:1.7rem;font-weight:800;margin-top:8px;letter-spacing:-.03em}.card .sub{font-size:.8rem;color:var(--good);margin-top:4px}
+    .filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;padding:14px;margin-bottom:18px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.78rem;color:var(--muted);font-weight:700}
+    input,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;color:var(--ink);min-height:44px}input:focus,select:focus{outline:3px solid rgba(0,91,172,.14);border-color:var(--mg)}
+    .main{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:18px;margin-bottom:18px}.panel{padding:20px}.panel h2{margin:0 0 4px;font-size:1.08rem}.panel .desc{color:var(--muted);font-size:.84rem;margin-bottom:14px}
+    .chart{height:350px;display:flex;align-items:flex-end;gap:14px;border-bottom:1px solid var(--line);border-left:1px solid var(--line);padding:24px 12px 0;position:relative;background:repeating-linear-gradient(to top,transparent 0,transparent 69px,#edf1f6 70px)}
+    .bar-group{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;gap:5px;position:relative}.bar{width:min(34px,42%);border-radius:6px 6px 0 0;position:relative;min-height:2px;transition:.25s}.bar.base{background:#89b2dc}.bar.max{background:var(--mg)}
+    .bar span{position:absolute;top:-23px;left:50%;transform:translateX(-50%);font-size:.73rem;font-weight:800;white-space:nowrap}.bar-label{position:absolute;bottom:-48px;width:110px;text-align:center;font-size:.75rem;line-height:1.2;color:#475467}
+    .legend{display:flex;gap:18px;margin:54px 0 0;font-size:.8rem;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}.insights{display:grid;gap:11px}.insight{padding:14px;border-radius:12px;background:var(--sky);border-left:4px solid var(--mg);line-height:1.55}.insight strong{color:var(--mg2)}
+    .table-panel{padding:0;overflow:hidden}.table-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}.count{font-size:.85rem;color:var(--muted)}.table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:970px}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #edf1f5;vertical-align:top}th{background:#f8fafc;font-size:.8rem;color:#475467;position:sticky;top:0}td{font-size:.9rem}.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:750}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--sky);color:var(--mg2);font-size:.75rem;font-weight:750}.top-rate{color:var(--good)}.empty{text-align:center;padding:40px;color:var(--muted)}
+    footer{color:var(--muted);font-size:.78rem;padding:18px 2px 4px;line-height:1.6}
+    @media(max-width:950px){.cards{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}.main{grid-template-columns:1fr}.chart{height:320px}}
+    @media(max-width:600px){.shell{padding:16px}.topbar{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr 1fr;gap:9px}.card{padding:14px}.card .value{font-size:1.35rem}.filters{grid-template-columns:1fr}.panel{padding:16px}.chart{gap:6px;padding-left:6px;padding-right:6px}.bar-group{gap:2px}.bar span{font-size:.65rem}.bar-label{width:62px;font-size:.67rem;word-break:keep-all}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><h1>주요 금융권 정기예금 비교</h1><div class="asof" id="asOf">기준일 2026.09.10 · 1년 만기 · 세전 연이율</div></div>
+      <div class="actions"><button class="btn" id="resetBtn">필터 초기화</button><button class="btn primary" id="csvBtn">CSV 다운로드</button></div>
+    </header>
+
+    <section class="cards" aria-label="핵심 지표">
+      <article class="card"><div class="label">비교 금융기관</div><div class="value" id="institutionCount">6곳</div><div class="sub">현재 필터 기준</div></article>
+      <article class="card"><div class="label">평균 최고금리</div><div class="value" id="averageRate">3.52%</div><div class="sub">단순 산술평균</div></article>
+      <article class="card"><div class="label">가장 높은 금리</div><div class="value" id="highestRate">4.01%</div><div class="sub" id="highestBank">OK저축은행</div></article>
+      <article class="card"><div class="label">최고·최저 차이</div><div class="value" id="rateSpread">1.46%p</div><div class="sub">최고우대금리 기준</div></article>
+    </section>
+
+    <section class="panel filters" aria-label="조회 조건">
+      <div class="field"><label for="search">금융기관 또는 상품 검색</label><input id="search" type="search" placeholder="예: 저축은행, 정기예금"></div>
+      <div class="field"><label for="sector">권역</label><select id="sector"><option value="">전체 권역</option><option>시중은행</option><option>상호금융</option><option>상호금융계열 은행</option><option>저축은행</option></select></div>
+      <div class="field"><label for="sort">정렬</label><select id="sort"><option value="max-desc">최고금리 높은 순</option><option value="base-desc">기본금리 높은 순</option><option value="name">금융기관명 순</option><option value="gap-desc">우대 폭 큰 순</option></select></div>
+      <div class="field"><label for="condition">우대조건</label><select id="condition"><option value="">전체 상품</option><option value="none">별도 조건 없음</option><option value="required">우대조건 있음</option></select></div>
+    </section>
+
+    <section class="main">
+      <article class="panel"><h2>금융기관별 금리</h2><div class="desc">기본금리와 최고우대금리를 비교합니다.</div><div class="chart" id="chart" role="img" aria-label="금융기관별 금리 막대그래프"></div><div class="legend"><span><i style="background:#89b2dc"></i>기본금리</span><span><i style="background:#005bac"></i>최고우대금리</span></div></article>
+      <aside class="panel"><h2>데이터 인사이트</h2><div class="desc">현재 조회 결과를 자동 분석합니다.</div><div class="insights" id="insights"></div></aside>
+    </section>
+
+    <section class="panel table-panel"><div class="table-head"><div><h2>상품 상세</h2></div><div class="count" id="rowCount">6건</div></div><div class="table-wrap"><table><thead><tr><th>금융기관</th><th>권역</th><th>상품명</th><th class="num">기본금리</th><th class="num">최고금리</th><th class="num">우대 폭</th><th>주요 우대 조건</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+    <footer>금리는 가입 시점과 조건에 따라 변경될 수 있습니다. 실제 가입 전 해당 금융기관의 최신 상품 공시를 확인하세요.</footer>
+  </main>
+  <script>
+    const fallbackData = [
+      {institution:'KB국민은행',sector:'시중은행',product:'KB Star 정기예금',base:2.40,max:3.20,condition:'비대면 가입 상품이며 가입 시점의 고객 적용금리 적용'},
+      {institution:'신한은행',sector:'시중은행',product:'쏠편한 정기예금',base:2.30,max:2.55,condition:'비대면 가입 및 기간별 고객 적용금리 적용'},
+      {institution:'신협(수지신협 기준)',sector:'상호금융',product:'유니온정기예탁금',base:3.70,max:3.70,condition:'스마트폰 전용 가입, 별도 우대조건 없음'},
+      {institution:'Sh수협은행',sector:'상호금융계열 은행',product:'Sh첫만남우대예금',base:2.70,max:3.75,condition:'최근 1년간 예·적금 활동계좌 미보유 첫 거래 고객 1.00%p, 마케팅 전체 동의 0.05%p'},
+      {institution:'SBI저축은행',sector:'저축은행',product:'정기예금(1년 변동금리)',base:3.70,max:3.90,condition:'비대면·채널별 우대 적용, 12개월마다 금리 변동'},
+      {institution:'OK저축은행',sector:'저축은행',product:'OK e-안심정기예금(변동금리)',base:4.01,max:4.01,condition:'비대면 전용, 별도 우대조건 없이 약정금리 적용'}
+    ];
+    let data = [...fallbackData];
+    const SUPABASE_URL = 'https://moyubydehanbripxoogi.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_emPA5u3REJIeV_YEiNE0fw_OS9OqjlY';
+    const $=s=>document.querySelector(s), fmt=n=>`${n.toFixed(2)}%`;
+    function filtered(){const q=$('#search').value.trim().toLowerCase(),sec=$('#sector').value,cond=$('#condition').value,sort=$('#sort').value;let rows=data.filter(r=>(!q||`${r.institution} ${r.product}`.toLowerCase().includes(q))&&(!sec||r.sector===sec)&&(!cond||(cond==='none'?(r.max===r.base):r.max>r.base)));return rows.sort((a,b)=>sort==='base-desc'?b.base-a.base:sort==='name'?a.institution.localeCompare(b.institution,'ko'):sort==='gap-desc'?(b.max-b.base)-(a.max-a.base):b.max-a.max)}
+    function render(){const rows=filtered();$('#institutionCount').textContent=`${rows.length}곳`;$('#rowCount').textContent=`${rows.length}건`;if(!rows.length){$('#averageRate').textContent='—';$('#highestRate').textContent='—';$('#highestBank').textContent='조회 결과 없음';$('#rateSpread').textContent='—';$('#tbody').innerHTML='<tr><td colspan="7" class="empty">조건에 맞는 상품이 없습니다.</td></tr>';$('#chart').innerHTML='';$('#insights').innerHTML='<div class="insight">조회 조건을 변경해 주세요.</div>';return}
+      const high=[...rows].sort((a,b)=>b.max-a.max)[0],low=[...rows].sort((a,b)=>a.max-b.max)[0],avg=rows.reduce((s,r)=>s+r.max,0)/rows.length;
+      $('#averageRate').textContent=fmt(avg);$('#highestRate').textContent=fmt(high.max);$('#highestBank').textContent=high.institution;$('#rateSpread').textContent=`${(high.max-low.max).toFixed(2)}%p`;
+      $('#tbody').innerHTML=rows.map(r=>`<tr><td><strong>${r.institution}</strong></td><td><span class="badge">${r.sector}</span></td><td>${r.product}</td><td class="num">${fmt(r.base)}</td><td class="num ${r===high?'top-rate':''}">${fmt(r.max)}</td><td class="num">${(r.max-r.base).toFixed(2)}%p</td><td>${r.condition}</td></tr>`).join('');
+      $('#chart').innerHTML=rows.map(r=>`<div class="bar-group"><div class="bar base" style="height:${r.base/4.5*100}%"><span>${fmt(r.base)}</span></div><div class="bar max" style="height:${r.max/4.5*100}%"><span>${fmt(r.max)}</span></div><div class="bar-label">${r.institution.replace('(수지신협 기준)','(수지)')}</div></div>`).join('');
+      const groups=rows.reduce((acc,r)=>{const key=r.sector.includes('저축은행')?'저축은행권':r.sector.includes('시중')?'시중은행':'상호금융권';(acc[key]??=[]).push(r);return acc},{});const groupAverages=Object.entries(groups).map(([name,v])=>({name,avg:v.reduce((s,r)=>s+r.max,0)/v.length})).sort((a,b)=>b.avg-a.avg);
+      $('#insights').innerHTML=`<div class="insight">최고금리는 <strong>${high.institution} ${fmt(high.max)}</strong>입니다.</div><div class="insight">조회 기관의 평균 최고금리는 <strong>${fmt(avg)}</strong>입니다.</div><div class="insight">최고·최저 격차는 <strong>${(high.max-low.max).toFixed(2)}%p</strong>입니다.</div>${groupAverages.length>1?`<div class="insight">권역 평균은 <strong>${groupAverages[0].name} ${fmt(groupAverages[0].avg)}</strong>가 가장 높습니다.</div>`:''}`;
+    }
+    function download(){const rows=filtered(),head=['금융기관명','권역 분류','대표 상품명','기본금리(연%)','최고우대금리(연%)','주요 우대 조건'],quote=v=>`"${String(v).replaceAll('"','""')}"`,body=rows.map(r=>[r.institution,r.sector,r.product,r.base.toFixed(2),r.max.toFixed(2),r.condition]);const blob=new Blob(['\uFEFF'+[head,...body].map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='정기예금_금리_조회결과.csv';a.click();URL.revokeObjectURL(a.href)}
+    async function loadData(){
+      try{
+        const response=await fetch(`${SUPABASE_URL}/rest/v1/major_financial_deposit_comparison?select=*&order=id.asc`,{headers:{apikey:SUPABASE_KEY}});
+        if(!response.ok) throw new Error(`HTTP ${response.status}`);
+        const rows=await response.json();
+        if(rows.length){
+          data=rows.map(r=>({institution:r.financial_institution,sector:r.sector,product:r.product_name,base:Number(r.base_rate),max:Number(r.maximum_rate),condition:r.preferential_conditions||''}));
+          const dates=rows.map(r=>r.as_of_date).filter(Boolean).sort();
+          if(dates.length) $('#asOf').textContent=`기준일 ${dates.at(-1).replaceAll('-','.')} · 1년 만기 · 세전 연이율`;
+        }
+      }catch(error){console.warn('Supabase 조회 실패로 내장 데이터를 표시합니다.',error)}
+      render();
+    }
+    ['#search','#sector','#sort','#condition'].forEach(s=>$(s).addEventListener('input',render));$('#csvBtn').addEventListener('click',download);$('#resetBtn').addEventListener('click',()=>{$('#search').value='';$('#sector').value='';$('#sort').value='max-desc';$('#condition').value='';render()});render();loadData();
+  </script>
+</body>
+</html>

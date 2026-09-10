@@ -51,7 +51,7 @@
       position: relative;
       overflow: hidden;
       border-radius: 28px;
-      padding: 30px 32px;
+      padding: 30px 190px 30px 32px;
       color: #fff;
       background: linear-gradient(135deg, var(--mg-blue-deep) 0%, var(--mg-blue) 62%, #1774C4 100%);
       box-shadow: var(--shadow);
@@ -66,6 +66,52 @@
       height: 280px;
       border-radius: 50%;
       border: 45px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-tools {
+      position: absolute;
+      top: 24px;
+      right: 26px;
+      z-index: 2;
+    }
+
+    .faq-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,0.38);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.96);
+      color: var(--mg-blue-dark);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .faq-link:hover {
+      transform: translateY(-1px);
+      background: #fff;
+      box-shadow: 0 11px 28px rgba(0,0,0,0.16);
+    }
+
+    .faq-link:focus-visible {
+      outline: 3px solid rgba(255,255,255,0.72);
+      outline-offset: 3px;
+    }
+
+    .faq-link svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .brand-row {
@@ -572,7 +618,9 @@
 
     @media (max-width: 760px) {
       .app-shell { width: min(100% - 20px, 1440px); margin-top: 10px; }
-      .hero { padding: 24px 20px; border-radius: 22px; }
+      .hero { padding: 20px; border-radius: 22px; }
+      .hero-tools { position: relative; top: auto; right: auto; display: flex; justify-content: flex-end; margin-bottom: 14px; }
+      .faq-link { min-height: 39px; padding: 0 13px; font-size: 13px; }
       .panel, .comparison-panel, .summary-panel, .schedule-panel { border-radius: 18px; }
       .input-panel, .comparison-panel, .summary-panel, .schedule-panel { padding: 18px; }
       .comparison-grid { grid-template-columns: 1fr; }
@@ -591,6 +639,12 @@
 <body>
   <main class="app-shell">
     <section class="hero" aria-labelledby="page-title">
+      <div class="hero-tools">
+        <a class="faq-link" href="https://kfcc019-ctrl.github.io/mg0910/FAQ" target="_blank" rel="noopener noreferrer" aria-label="업무 FAQ 페이지 새 창으로 열기">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18h.01"/><path d="M9.1 9a3 3 0 1 1 5.8 1c0 2-3 2-3 4"/><circle cx="12" cy="12" r="9"/></svg>
+          FAQ 바로가기
+        </a>
+      </div>
       <div class="brand-row">
         <div class="brand-mark" aria-hidden="true">MG</div>
         <div>

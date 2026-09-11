@@ -10,7 +10,7 @@
     *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:16px}
     button,input,select{font:inherit}.shell{max-width:1440px;margin:auto;padding:24px}.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}
     h1{font-size:clamp(1.45rem,3vw,2.15rem);margin:0;letter-spacing:-.04em}.asof{margin-top:7px;color:var(--muted);font-size:.9rem}.actions{display:flex;gap:9px;flex-wrap:wrap}
-    .btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.btn.primary{background:var(--mg);border-color:var(--mg);color:#fff}.btn:hover{transform:translateY(-1px)}
+    .btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.btn.primary{background:var(--mg);border-color:var(--mg);color:#fff}.btn.danger{color:#b42318;border-color:#f4c7c3;background:#fff7f6}.btn.small{padding:7px 10px;font-size:.8rem}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
     .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.card,.panel{background:var(--white);border:1px solid var(--line);border-radius:16px;box-shadow:0 7px 22px rgba(24,60,97,.055)}
     .card{padding:18px}.card .label{font-size:.88rem;color:var(--muted);font-weight:650}.card .value{font-size:1.7rem;font-weight:800;margin-top:8px;letter-spacing:-.03em}.card .sub{font-size:.8rem;color:var(--good);margin-top:4px}
     .filters{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;padding:14px;margin-bottom:18px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:.78rem;color:var(--muted);font-weight:700}
@@ -20,18 +20,35 @@
     .bar-group{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;gap:5px;position:relative}.bar{width:min(34px,42%);border-radius:6px 6px 0 0;position:relative;min-height:2px;transition:.25s}.bar.base{background:#89b2dc}.bar.max{background:var(--mg)}
     .bar span{position:absolute;top:-23px;left:50%;transform:translateX(-50%);font-size:.73rem;font-weight:800;white-space:nowrap}.bar-label{position:absolute;bottom:-48px;width:110px;text-align:center;font-size:.75rem;line-height:1.2;color:#475467}
     .legend{display:flex;gap:18px;margin:54px 0 0;font-size:.8rem;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}.insights{display:grid;gap:11px}.insight{padding:14px;border-radius:12px;background:var(--sky);border-left:4px solid var(--mg);line-height:1.55}.insight strong{color:var(--mg2)}
-    .table-panel{padding:0;overflow:hidden}.table-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}.count{font-size:.85rem;color:var(--muted)}.table-wrap{overflow:auto}
-    table{width:100%;border-collapse:collapse;min-width:970px}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #edf1f5;vertical-align:top}th{background:#f8fafc;font-size:.8rem;color:#475467;position:sticky;top:0}td{font-size:.9rem}.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:750}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--sky);color:var(--mg2);font-size:.75rem;font-weight:750}.top-rate{color:var(--good)}.empty{text-align:center;padding:40px;color:var(--muted)}
+    .table-panel{padding:0;overflow:hidden}.table-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.table-tools{display:flex;align-items:center;gap:10px}.count{font-size:.85rem;color:var(--muted)}.table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:1100px}th,td{padding:14px 16px;text-align:left;border-bottom:1px solid #edf1f5;vertical-align:top}th{background:#f8fafc;font-size:.8rem;color:#475467;position:sticky;top:0}td{font-size:.9rem}.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:750}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:var(--sky);color:var(--mg2);font-size:.75rem;font-weight:750}.top-rate{color:var(--good)}.empty{text-align:center;padding:40px;color:var(--muted)}.row-actions{display:flex;gap:6px;white-space:nowrap}
     footer{color:var(--muted);font-size:.78rem;padding:18px 2px 4px;line-height:1.6}
+    .connect-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;background:linear-gradient(145deg,rgba(0,59,115,.96),rgba(0,91,172,.9));backdrop-filter:blur(12px)}.connect-overlay[hidden]{display:none}
+    .connect-box{width:min(480px,100%);background:#fff;border-radius:22px;padding:28px;box-shadow:0 24px 80px rgba(0,20,45,.3)}.connect-mark{width:46px;height:46px;display:grid;place-items:center;border-radius:14px;background:var(--mg);color:#fff;font-weight:900;margin-bottom:18px}.connect-box h2{margin:0;font-size:1.45rem}.connect-copy{color:var(--muted);line-height:1.55;margin:8px 0 22px}.connect-form{display:grid;gap:15px}.connect-form .btn{margin-top:4px;min-height:48px}.security-note{background:#f3f7fb;border-radius:10px;padding:11px 12px;color:#475467;font-size:.78rem;line-height:1.5}.error{min-height:20px;color:#c12c2c;font-size:.82rem;font-weight:700}.connection{display:flex;align-items:center;gap:7px;color:var(--good);font-size:.82rem;font-weight:750}.connection::before{content:'';width:8px;height:8px;border-radius:50%;background:#12a477}
+    .modal{position:fixed;inset:0;z-index:900;display:grid;place-items:center;padding:20px;background:rgba(10,25,44,.55);backdrop-filter:blur(5px)}.modal[hidden]{display:none}.modal-box{width:min(620px,100%);max-height:calc(100vh - 40px);overflow:auto;background:#fff;border-radius:20px;padding:24px;box-shadow:0 24px 80px rgba(0,20,45,.28)}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.modal-head h2{margin:0;font-size:1.3rem}.close-btn{border:0;background:#eef3f8;width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:1.3rem}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-grid .wide{grid-column:1/-1}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.form-error{color:#b42318;font-size:.85rem;font-weight:700;min-height:20px;margin-top:10px}.toast{position:fixed;z-index:1100;right:22px;bottom:22px;max-width:380px;padding:13px 16px;border-radius:12px;background:#122033;color:#fff;box-shadow:0 12px 36px rgba(0,0,0,.25);font-weight:700}.toast[hidden]{display:none}
     @media(max-width:950px){.cards{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}.main{grid-template-columns:1fr}.chart{height:320px}}
-    @media(max-width:600px){.shell{padding:16px}.topbar{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr 1fr;gap:9px}.card{padding:14px}.card .value{font-size:1.35rem}.filters{grid-template-columns:1fr}.panel{padding:16px}.chart{gap:6px;padding-left:6px;padding-right:6px}.bar-group{gap:2px}.bar span{font-size:.65rem}.bar-label{width:62px;font-size:.67rem;word-break:keep-all}}
+    @media(max-width:600px){.shell{padding:16px}.topbar{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr 1fr;gap:9px}.card{padding:14px}.card .value{font-size:1.35rem}.filters{grid-template-columns:1fr}.panel{padding:16px}.chart{gap:6px;padding-left:6px;padding-right:6px}.bar-group{gap:2px}.bar span{font-size:.65rem}.bar-label{width:62px;font-size:.67rem;word-break:keep-all}.table-head{align-items:flex-start}.table-tools{align-items:flex-end;flex-direction:column}.form-grid{grid-template-columns:1fr}.form-grid .wide{grid-column:auto}.modal-box{padding:19px}.toast{left:16px;right:16px;bottom:16px}}
   </style>
 </head>
 <body>
+  <section class="connect-overlay" id="connectOverlay" aria-modal="true" role="dialog" aria-labelledby="connectTitle">
+    <div class="connect-box">
+      <div class="connect-mark">MG</div>
+      <h2 id="connectTitle">Supabase 연결</h2>
+      <p class="connect-copy">프로젝트 정보를 입력하면 정기예금 비교 데이터를 불러옵니다.</p>
+      <form class="connect-form" id="connectForm">
+        <div class="field"><label for="urlInput">Project URL</label><input id="urlInput" type="url" placeholder="https://xxxxx.supabase.co" autocomplete="off" required></div>
+        <div class="field"><label for="keyInput">Publishable key</label><input id="keyInput" type="password" placeholder="sb_publishable_..." autocomplete="off" required></div>
+        <div class="security-note">Publishable key만 입력하세요. Secret key와 service_role 키는 브라우저에서 사용하면 안 됩니다. 입력값은 현재 브라우저 탭의 세션에만 보관됩니다.</div>
+        <div class="error" id="connectError" role="alert"></div>
+        <button class="btn primary" id="connectBtn" type="submit">연결하고 대시보드 열기</button>
+      </form>
+    </div>
+  </section>
   <main class="shell">
     <header class="topbar">
       <div><h1>주요 금융권 정기예금 비교</h1><div class="asof" id="asOf">기준일 2026.09.10 · 1년 만기 · 세전 연이율</div></div>
-      <div class="actions"><button class="btn" id="resetBtn">필터 초기화</button><button class="btn primary" id="csvBtn">CSV 다운로드</button></div>
+      <div class="actions"><span class="connection" id="connectionLabel">Supabase 연결됨</span><button class="btn" id="changeConnectionBtn">연결 변경</button><button class="btn" id="resetBtn">필터 초기화</button><button class="btn primary" id="csvBtn">CSV 다운로드</button></div>
     </header>
 
     <section class="cards" aria-label="핵심 지표">
@@ -53,46 +70,73 @@
       <aside class="panel"><h2>데이터 인사이트</h2><div class="desc">현재 조회 결과를 자동 분석합니다.</div><div class="insights" id="insights"></div></aside>
     </section>
 
-    <section class="panel table-panel"><div class="table-head"><div><h2>상품 상세</h2></div><div class="count" id="rowCount">6건</div></div><div class="table-wrap"><table><thead><tr><th>금융기관</th><th>권역</th><th>상품명</th><th class="num">기본금리</th><th class="num">최고금리</th><th class="num">우대 폭</th><th>주요 우대 조건</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
+    <section class="panel table-panel"><div class="table-head"><div><h2>상품 상세</h2></div><div class="table-tools"><div class="count" id="rowCount">0건</div><button class="btn primary" id="addBtn" type="button">+ 상품 추가</button></div></div><div class="table-wrap"><table><thead><tr><th>금융기관</th><th>권역</th><th>상품명</th><th class="num">기본금리</th><th class="num">최고금리</th><th class="num">우대 폭</th><th>주요 우대 조건</th><th>관리</th></tr></thead><tbody id="tbody"></tbody></table></div></section>
     <footer>금리는 가입 시점과 조건에 따라 변경될 수 있습니다. 실제 가입 전 해당 금융기관의 최신 상품 공시를 확인하세요.</footer>
   </main>
+  <section class="modal" id="productModal" hidden aria-modal="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-head"><h2 id="modalTitle">상품 추가</h2><button class="close-btn" id="closeModalBtn" type="button" aria-label="닫기">×</button></div>
+      <form id="productForm">
+        <input id="editId" type="hidden">
+        <div class="form-grid">
+          <div class="field"><label for="asOfInput">기준일</label><input id="asOfInput" type="date" required></div>
+          <div class="field"><label for="institutionInput">금융기관명</label><input id="institutionInput" required maxlength="100"></div>
+          <div class="field"><label for="sectorInput">권역 분류</label><input id="sectorInput" required maxlength="100"></div>
+          <div class="field"><label for="productInput">대표 상품명</label><input id="productInput" required maxlength="150"></div>
+          <div class="field"><label for="baseRateInput">기본금리(연%)</label><input id="baseRateInput" type="number" min="0" max="100" step="0.01" required></div>
+          <div class="field"><label for="maxRateInput">최고우대금리(연%)</label><input id="maxRateInput" type="number" min="0" max="100" step="0.01" required></div>
+          <div class="field wide"><label for="conditionInput">주요 우대 조건</label><input id="conditionInput" maxlength="500"></div>
+        </div>
+        <div class="form-error" id="formError" role="alert"></div>
+        <div class="modal-actions"><button class="btn" id="cancelModalBtn" type="button">취소</button><button class="btn primary" id="saveBtn" type="submit">저장</button></div>
+      </form>
+    </div>
+  </section>
+  <div class="toast" id="toast" hidden role="status"></div>
   <script>
-    const fallbackData = [
-      {institution:'KB국민은행',sector:'시중은행',product:'KB Star 정기예금',base:2.40,max:3.20,condition:'비대면 가입 상품이며 가입 시점의 고객 적용금리 적용'},
-      {institution:'신한은행',sector:'시중은행',product:'쏠편한 정기예금',base:2.30,max:2.55,condition:'비대면 가입 및 기간별 고객 적용금리 적용'},
-      {institution:'신협(수지신협 기준)',sector:'상호금융',product:'유니온정기예탁금',base:3.70,max:3.70,condition:'스마트폰 전용 가입, 별도 우대조건 없음'},
-      {institution:'Sh수협은행',sector:'상호금융계열 은행',product:'Sh첫만남우대예금',base:2.70,max:3.75,condition:'최근 1년간 예·적금 활동계좌 미보유 첫 거래 고객 1.00%p, 마케팅 전체 동의 0.05%p'},
-      {institution:'SBI저축은행',sector:'저축은행',product:'정기예금(1년 변동금리)',base:3.70,max:3.90,condition:'비대면·채널별 우대 적용, 12개월마다 금리 변동'},
-      {institution:'OK저축은행',sector:'저축은행',product:'OK e-안심정기예금(변동금리)',base:4.01,max:4.01,condition:'비대면 전용, 별도 우대조건 없이 약정금리 적용'}
-    ];
-    let data = [...fallbackData];
-    const SUPABASE_URL = 'https://moyubydehanbripxoogi.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_emPA5u3REJIeV_YEiNE0fw_OS9OqjlY';
-    const $=s=>document.querySelector(s), fmt=n=>`${n.toFixed(2)}%`;
+    let data = [], connection = null;
+    const $=s=>document.querySelector(s), fmt=n=>`${n.toFixed(2)}%`, esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     function filtered(){const q=$('#search').value.trim().toLowerCase(),sec=$('#sector').value,cond=$('#condition').value,sort=$('#sort').value;let rows=data.filter(r=>(!q||`${r.institution} ${r.product}`.toLowerCase().includes(q))&&(!sec||r.sector===sec)&&(!cond||(cond==='none'?(r.max===r.base):r.max>r.base)));return rows.sort((a,b)=>sort==='base-desc'?b.base-a.base:sort==='name'?a.institution.localeCompare(b.institution,'ko'):sort==='gap-desc'?(b.max-b.base)-(a.max-a.base):b.max-a.max)}
-    function render(){const rows=filtered();$('#institutionCount').textContent=`${rows.length}곳`;$('#rowCount').textContent=`${rows.length}건`;if(!rows.length){$('#averageRate').textContent='—';$('#highestRate').textContent='—';$('#highestBank').textContent='조회 결과 없음';$('#rateSpread').textContent='—';$('#tbody').innerHTML='<tr><td colspan="7" class="empty">조건에 맞는 상품이 없습니다.</td></tr>';$('#chart').innerHTML='';$('#insights').innerHTML='<div class="insight">조회 조건을 변경해 주세요.</div>';return}
+    function render(){const rows=filtered();$('#institutionCount').textContent=`${rows.length}곳`;$('#rowCount').textContent=`${rows.length}건`;if(!rows.length){$('#averageRate').textContent='—';$('#highestRate').textContent='—';$('#highestBank').textContent='조회 결과 없음';$('#rateSpread').textContent='—';$('#tbody').innerHTML='<tr><td colspan="8" class="empty">조건에 맞는 상품이 없습니다.</td></tr>';$('#chart').innerHTML='';$('#insights').innerHTML='<div class="insight">조회 조건을 변경해 주세요.</div>';return}
       const high=[...rows].sort((a,b)=>b.max-a.max)[0],low=[...rows].sort((a,b)=>a.max-b.max)[0],avg=rows.reduce((s,r)=>s+r.max,0)/rows.length;
       $('#averageRate').textContent=fmt(avg);$('#highestRate').textContent=fmt(high.max);$('#highestBank').textContent=high.institution;$('#rateSpread').textContent=`${(high.max-low.max).toFixed(2)}%p`;
-      $('#tbody').innerHTML=rows.map(r=>`<tr><td><strong>${r.institution}</strong></td><td><span class="badge">${r.sector}</span></td><td>${r.product}</td><td class="num">${fmt(r.base)}</td><td class="num ${r===high?'top-rate':''}">${fmt(r.max)}</td><td class="num">${(r.max-r.base).toFixed(2)}%p</td><td>${r.condition}</td></tr>`).join('');
-      $('#chart').innerHTML=rows.map(r=>`<div class="bar-group"><div class="bar base" style="height:${r.base/4.5*100}%"><span>${fmt(r.base)}</span></div><div class="bar max" style="height:${r.max/4.5*100}%"><span>${fmt(r.max)}</span></div><div class="bar-label">${r.institution.replace('(수지신협 기준)','(수지)')}</div></div>`).join('');
+      $('#tbody').innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.institution)}</strong></td><td><span class="badge">${esc(r.sector)}</span></td><td>${esc(r.product)}</td><td class="num">${fmt(r.base)}</td><td class="num ${r===high?'top-rate':''}">${fmt(r.max)}</td><td class="num">${(r.max-r.base).toFixed(2)}%p</td><td>${esc(r.condition)}</td><td><div class="row-actions"><button class="btn small" type="button" data-edit="${r.id}">수정</button><button class="btn danger small" type="button" data-delete="${r.id}">삭제</button></div></td></tr>`).join('');
+      $('#chart').innerHTML=rows.map(r=>`<div class="bar-group"><div class="bar base" style="height:${Math.min(r.base/4.5*100,100)}%"><span>${fmt(r.base)}</span></div><div class="bar max" style="height:${Math.min(r.max/4.5*100,100)}%"><span>${fmt(r.max)}</span></div><div class="bar-label">${esc(r.institution.replace('(수지신협 기준)','(수지)'))}</div></div>`).join('');
       const groups=rows.reduce((acc,r)=>{const key=r.sector.includes('저축은행')?'저축은행권':r.sector.includes('시중')?'시중은행':'상호금융권';(acc[key]??=[]).push(r);return acc},{});const groupAverages=Object.entries(groups).map(([name,v])=>({name,avg:v.reduce((s,r)=>s+r.max,0)/v.length})).sort((a,b)=>b.avg-a.avg);
       $('#insights').innerHTML=`<div class="insight">최고금리는 <strong>${high.institution} ${fmt(high.max)}</strong>입니다.</div><div class="insight">조회 기관의 평균 최고금리는 <strong>${fmt(avg)}</strong>입니다.</div><div class="insight">최고·최저 격차는 <strong>${(high.max-low.max).toFixed(2)}%p</strong>입니다.</div>${groupAverages.length>1?`<div class="insight">권역 평균은 <strong>${groupAverages[0].name} ${fmt(groupAverages[0].avg)}</strong>가 가장 높습니다.</div>`:''}`;
     }
     function download(){const rows=filtered(),head=['금융기관명','권역 분류','대표 상품명','기본금리(연%)','최고우대금리(연%)','주요 우대 조건'],quote=v=>`"${String(v).replaceAll('"','""')}"`,body=rows.map(r=>[r.institution,r.sector,r.product,r.base.toFixed(2),r.max.toFixed(2),r.condition]);const blob=new Blob(['\uFEFF'+[head,...body].map(r=>r.map(quote).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='정기예금_금리_조회결과.csv';a.click();URL.revokeObjectURL(a.href)}
-    async function loadData(){
-      try{
-        const response=await fetch(`${SUPABASE_URL}/rest/v1/major_financial_deposit_comparison?select=*&order=id.asc`,{headers:{apikey:SUPABASE_KEY}});
-        if(!response.ok) throw new Error(`HTTP ${response.status}`);
-        const rows=await response.json();
-        if(rows.length){
-          data=rows.map(r=>({institution:r.financial_institution,sector:r.sector,product:r.product_name,base:Number(r.base_rate),max:Number(r.maximum_rate),condition:r.preferential_conditions||''}));
-          const dates=rows.map(r=>r.as_of_date).filter(Boolean).sort();
-          if(dates.length) $('#asOf').textContent=`기준일 ${dates.at(-1).replaceAll('-','.')} · 1년 만기 · 세전 연이율`;
-        }
-      }catch(error){console.warn('Supabase 조회 실패로 내장 데이터를 표시합니다.',error)}
+    async function api(path,options={}){if(!connection)throw new Error('Supabase에 먼저 연결해 주세요.');const response=await fetch(`${connection.url}/rest/v1/${path}`,{...options,headers:{apikey:connection.key,'Content-Type':'application/json',...(options.headers||{})}});if(!response.ok){const detail=await response.json().catch(()=>({}));throw new Error(detail.message||detail.hint||`요청에 실패했습니다. (${response.status})`)}const body=await response.text();return body?JSON.parse(body):null}
+    async function loadData(url,key){
+      const baseUrl=url.trim().replace(/\/+$/,'');
+      if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(baseUrl)) throw new Error('올바른 Supabase Project URL을 입력해 주세요.');
+      if(!key.trim().startsWith('sb_publishable_')) throw new Error('sb_publishable_로 시작하는 Publishable key만 사용할 수 있습니다.');
+      const response=await fetch(`${baseUrl}/rest/v1/major_financial_deposit_comparison?select=*&order=id.asc`,{headers:{apikey:key.trim()}});
+      if(!response.ok){const detail=await response.json().catch(()=>({}));throw new Error(detail.message||`연결에 실패했습니다. (${response.status})`)}
+      const rows=await response.json();
+      connection={url:baseUrl,key:key.trim()};
+      data=rows.map(r=>({id:r.id,asOf:r.as_of_date,institution:r.financial_institution,sector:r.sector,product:r.product_name,base:Number(r.base_rate),max:Number(r.maximum_rate),condition:r.preferential_conditions||''}));
+      const dates=rows.map(r=>r.as_of_date).filter(Boolean).sort();
+      if(dates.length) $('#asOf').textContent=`기준일 ${dates.at(-1).replaceAll('-','.')} · 1년 만기 · 세전 연이율`;
+      sessionStorage.setItem('depositDashboardConnection',JSON.stringify({url:baseUrl,key:key.trim()}));
+      $('#connectionLabel').textContent=new URL(baseUrl).hostname.split('.')[0];
       render();
     }
-    ['#search','#sector','#sort','#condition'].forEach(s=>$(s).addEventListener('input',render));$('#csvBtn').addEventListener('click',download);$('#resetBtn').addEventListener('click',()=>{$('#search').value='';$('#sector').value='';$('#sort').value='max-desc';$('#condition').value='';render()});render();loadData();
+    function showToast(message){const toast=$('#toast');toast.textContent=message;toast.hidden=false;clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.hidden=true,2600)}
+    function openModal(row=null){$('#productForm').reset();$('#formError').textContent='';$('#editId').value=row?.id||'';$('#modalTitle').textContent=row?'상품 수정':'상품 추가';$('#asOfInput').value=row?.asOf||new Date().toISOString().slice(0,10);$('#institutionInput').value=row?.institution||'';$('#sectorInput').value=row?.sector||'';$('#productInput').value=row?.product||'';$('#baseRateInput').value=row?.base??'';$('#maxRateInput').value=row?.max??'';$('#conditionInput').value=row?.condition||'';$('#productModal').hidden=false;$('#institutionInput').focus()}
+    function closeModal(){$('#productModal').hidden=true}
+    async function saveProduct(event){event.preventDefault();const button=$('#saveBtn'),id=$('#editId').value,payload={as_of_date:$('#asOfInput').value,financial_institution:$('#institutionInput').value.trim(),sector:$('#sectorInput').value.trim(),product_name:$('#productInput').value.trim(),base_rate:Number($('#baseRateInput').value),maximum_rate:Number($('#maxRateInput').value),preferential_conditions:$('#conditionInput').value.trim()||null};if(payload.maximum_rate<payload.base_rate){$('#formError').textContent='최고우대금리는 기본금리보다 낮을 수 없습니다.';return}button.disabled=true;button.textContent='저장 중…';$('#formError').textContent='';try{await api(id?`major_financial_deposit_comparison?id=eq.${encodeURIComponent(id)}`:'major_financial_deposit_comparison',{method:id?'PATCH':'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(payload)});await loadData(connection.url,connection.key);closeModal();showToast(id?'상품을 수정했습니다.':'상품을 추가했습니다.')}catch(error){$('#formError').textContent=error.message}finally{button.disabled=false;button.textContent='저장'}}
+    async function deleteProduct(id){const row=data.find(r=>String(r.id)===String(id));if(!row)return;if(!confirm(`${row.institution}의 ${row.product}을(를) 삭제할까요?\n삭제한 데이터는 복구할 수 없습니다.`))return;try{await api(`major_financial_deposit_comparison?id=eq.${encodeURIComponent(id)}`,{method:'DELETE',headers:{Prefer:'return=minimal'}});await loadData(connection.url,connection.key);showToast('상품을 삭제했습니다.')}catch(error){alert(error.message)}}
+    async function connect(event){
+      event?.preventDefault();const button=$('#connectBtn');button.disabled=true;button.textContent='연결 확인 중…';$('#connectError').textContent='';
+      try{await loadData($('#urlInput').value,$('#keyInput').value);$('#connectOverlay').hidden=true}
+      catch(error){$('#connectError').textContent=error.message}
+      finally{button.disabled=false;button.textContent='연결하고 대시보드 열기'}
+    }
+    $('#connectForm').addEventListener('submit',connect);$('#changeConnectionBtn').addEventListener('click',()=>{$('#connectOverlay').hidden=false;$('#keyInput').value='';$('#keyInput').focus()});
+    $('#addBtn').addEventListener('click',()=>openModal());$('#closeModalBtn').addEventListener('click',closeModal);$('#cancelModalBtn').addEventListener('click',closeModal);$('#productForm').addEventListener('submit',saveProduct);$('#productModal').addEventListener('click',e=>{if(e.target===$('#productModal'))closeModal()});$('#tbody').addEventListener('click',e=>{const edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(edit)openModal(data.find(r=>String(r.id)===edit.dataset.edit));if(del)deleteProduct(del.dataset.delete)});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#productModal').hidden)closeModal()});
+    ['#search','#sector','#sort','#condition'].forEach(s=>$(s).addEventListener('input',render));$('#csvBtn').addEventListener('click',download);$('#resetBtn').addEventListener('click',()=>{$('#search').value='';$('#sector').value='';$('#sort').value='max-desc';$('#condition').value='';render()});
+    const saved=sessionStorage.getItem('depositDashboardConnection');if(saved){try{const c=JSON.parse(saved);$('#urlInput').value=c.url;$('#keyInput').value=c.key;connect()}catch{sessionStorage.removeItem('depositDashboardConnection')}}else{$('#urlInput').focus()}
   </script>
 </body>
 </html>
